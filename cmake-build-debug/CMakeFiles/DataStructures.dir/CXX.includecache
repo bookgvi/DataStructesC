@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/bookgvi/CLionProjects/DataStructures/BinaryHeap/BinaryHeap.cpp
+bits/stdc++.h
+-
+
+/Users/bookgvi/CLionProjects/DataStructures/SegmentTree/SegmentTree.cpp
+bits/stdc++.h
+-
+
+/Users/bookgvi/CLionProjects/DataStructures/main.cpp
+BinaryHeap/BinaryHeap.cpp
+/Users/bookgvi/CLionProjects/DataStructures/BinaryHeap/BinaryHeap.cpp
+SegmentTree/SegmentTree.cpp
+/Users/bookgvi/CLionProjects/DataStructures/SegmentTree/SegmentTree.cpp
+
