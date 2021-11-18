@@ -5,24 +5,21 @@ using namespace std;
 typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
-class AnotherGraph {
-private:
+class SomeGraph {
     vvi g;
-    int used[7], time_in[7], time_out[7], mst[7], p[7];
-    int time = 0, cycle_start, cycle_end;
-    bool cycle = false;
-
-    void addEdge(int v1, int v2) {
-        g[v1].push_back(v2);
-    }
+    vi vInCycle;
+    int time = 0, cycle = 0, cycle_st, cycle_end;
+    int used[7], mst[7], time_in[7], time_out[7], p[7];
 
     void setUnused() {
-        size_t size = sizeof(used) / sizeof(used[0]);
-        memset(used, 0, size * sizeof(int));
+        memset(used, 0, 7 * sizeof(int));
     }
-
 public:
-    AnotherGraph() : g(7, vi(0)) {}
+    SomeGraph() : g(7, vi(0)) {}
+
+    void addEdge(int start, int end) {
+        g[start].push_back(end);
+    }
 
     vvi build() {
         addEdge(0, 1);
@@ -43,44 +40,39 @@ public:
         return g;
     }
 
-    void reset() {
-        setUnused();
-    }
-
     void dfs(int v) {
         used[v] = 1;
         time_in[v] = time++;
         mst[v] = v;
-        for (size_t i = 0; i < g[v].size(); i += 1) {
+        for (int i = 0; i != g[v].size(); i += 1) {
             int next = g[v][i];
             if (used[next] == 0) {
                 p[next] = v;
                 dfs(next);
-            } else if (used[next] == 1 && next != p[v]) {
-                cycle_start = next;
+            } else if (used[next] == 1 && p[v] != next) {
+                cycle = 1;
+                cycle_st = next;
                 cycle_end = v;
-                cycle = true;
             }
         }
         used[v] = 2;
         time_out[v] = time++;
     }
 
-    vi getCycle() {
-        vi cycleV;
-        if (cycle) {
-            while (cycle_end != cycle_start) {
-                cycleV.push_back(cycle_end);
-                cycle_end = p[cycle_end];
-            }
-            cycleV.push_back(cycle_start);
+    void getCycle() {
+        while(cycle_end != cycle_st) {
+            vInCycle.push_back(cycle_end);
+            cycle_end = p[cycle_end];
         }
-        return cycleV;
+        vInCycle.push_back(cycle_st);
     }
 
-    void displayMST() {
+    void display() {
         for (auto i : mst) {
             printf("%d(%d, %d)\n", mst[i], time_in[i], time_out[i]);
         }
+        for (auto v : vInCycle)
+            printf("%d ", v);
+        cout << "\n";
     }
 };
