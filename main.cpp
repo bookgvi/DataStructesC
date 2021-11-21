@@ -3,12 +3,13 @@
 #include "Graph/SomeGraph.cpp"
 #include "Graph/StarGraph.cpp"
 #include "Graph/AnotherGraph.cpp"
+#include "Graph/GraphAndTopoSort.cpp"
 
 typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
 int main() {
-    AnotherGraph app;
+    GraphAndTopoSort app;
     app.work();
     return 0;
 }
