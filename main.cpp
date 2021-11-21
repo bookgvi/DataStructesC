@@ -1,10 +1,14 @@
 #include "BinaryHeap/BinaryHeap.cpp"
 #include "SegmentTree/SegmentTree.cpp"
+#include "Graph/SomeGraph.cpp"
+#include "Graph/StarGraph.cpp"
+#include "Graph/AnotherGraph.cpp"
+
+typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
 
 int main() {
-    build();
-//    st.modify(0, 0);
-    int res = query(0, 10);
-    cout << res;
+    AnotherGraph app;
+    app.work();
     return 0;
 }

@@ -10,6 +10,18 @@
 bits/stdc++.h
 -
 
+/Users/bookgvi/CLionProjects/DataStructures/Graph/AnotherGraph.cpp
+bits/stdc++.h
+-
+
+/Users/bookgvi/CLionProjects/DataStructures/Graph/SomeGraph.cpp
+bits/stdc++.h
+-
+
+/Users/bookgvi/CLionProjects/DataStructures/Graph/StarGraph.cpp
+bits/stdc++.h
+-
+
 /Users/bookgvi/CLionProjects/DataStructures/SegmentTree/SegmentTree.cpp
 bits/stdc++.h
 -
@@ -19,4 +31,10 @@ BinaryHeap/BinaryHeap.cpp
 /Users/bookgvi/CLionProjects/DataStructures/BinaryHeap/BinaryHeap.cpp
 SegmentTree/SegmentTree.cpp
 /Users/bookgvi/CLionProjects/DataStructures/SegmentTree/SegmentTree.cpp
+Graph/SomeGraph.cpp
+/Users/bookgvi/CLionProjects/DataStructures/Graph/SomeGraph.cpp
+Graph/StarGraph.cpp
+/Users/bookgvi/CLionProjects/DataStructures/Graph/StarGraph.cpp
+Graph/AnotherGraph.cpp
+/Users/bookgvi/CLionProjects/DataStructures/Graph/AnotherGraph.cpp
 

@@ -3,5 +3,8 @@
 
 CMakeFiles/DataStructures.dir/main.cpp.o
  /Users/bookgvi/CLionProjects/DataStructures/BinaryHeap/BinaryHeap.cpp
+ /Users/bookgvi/CLionProjects/DataStructures/Graph/AnotherGraph.cpp
+ /Users/bookgvi/CLionProjects/DataStructures/Graph/SomeGraph.cpp
+ /Users/bookgvi/CLionProjects/DataStructures/Graph/StarGraph.cpp
  /Users/bookgvi/CLionProjects/DataStructures/SegmentTree/SegmentTree.cpp
  /Users/bookgvi/CLionProjects/DataStructures/main.cpp
