@@ -5,7 +5,7 @@ typedef vector<int> vi;
 
 class DSU {
 private:
-    vi parent;
+    vi parent, size;
 
     void makeSet(int v) {
         parent[v] = v;
@@ -13,16 +13,25 @@ private:
 
     int find_set(int v) {
         if (parent[v] == v) return v;
-        return find_set(parent[v]);
+        return parent[v] = find_set(parent[v]);
     }
 
     void union_sets(int a, int b) {
         a = find_set(a);
         b = find_set(b);
         if (a != b)
+            if (size[a] < size[b])
+                swap(a, b);
             parent[b] = a;
+            size[a] += size[b];
     }
 
 public:
-    DSU() : parent(10) {}
+    DSU(int n) : parent(n), size(n, 1) {
+        iota(begin(parent), end(parent), 0);
+    }
+
+    void work() {
+
+    }
 };
