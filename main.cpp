@@ -4,12 +4,14 @@
 #include "Graph/StarGraph.cpp"
 #include "Graph/AnotherGraph.cpp"
 #include "Graph/GraphAndTopoSort.cpp"
+#include "Graph/LargestComponentSizebyCommonFactor.cpp"
+#include "Graph/DSU.cpp"
 
 typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
 int main() {
-    GraphAndTopoSort app;
+    AnotherGraph app;
     app.work();
     return 0;
 }

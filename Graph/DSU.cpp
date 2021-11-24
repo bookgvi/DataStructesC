@@ -20,7 +20,7 @@ public:
         iota(begin(parent), end(parent), 0);
     }
 
-    void makeSet(int v) {
+    void set_parent(int v) {
         parent[v] = v;
     }
 
@@ -38,7 +38,6 @@ public:
         parent[b] = a;
         size[a] += size[b];
     }
-
 };
 
 class SolutionForLCSCF {

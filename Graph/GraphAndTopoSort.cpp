@@ -14,11 +14,14 @@ typedef vector<int> vi;
  *
  * */
 class GraphAndTopoSort {
-private:
     vvi g;
     vi topo, cycle;
     int time = 0, isCycle = 0, cycle_start, cycle_end;
     int used[6], time_in[6], time_out[6], p[6];
+
+    void setUnused() {
+        memset(used, 0, 6 * sizeof(int));
+    }
 
     void addEdge(int start, int end) {
         g[start].push_back(end);
@@ -41,15 +44,6 @@ private:
         setUnused();
     }
 
-    void setUnused() {
-        memset(used, 0, 6 * sizeof(int));
-    }
-
-    void reset() {
-        setUnused();
-        isCycle = 0;
-    }
-
     void dfs(int v) {
         used[v] = 1;
         time_in[v] = time++;
@@ -69,29 +63,39 @@ private:
         topo.push_back(v);
     }
 
-    void topoSort() {
+    void getTopo() {
         for (int i = 0; i < 6 && !isCycle; i += 1) {
             if (!used[i]) dfs(i);
         }
-        if (topo.empty() || isCycle) {
-            cout << "graph has a cycle\n";
-            while (cycle_end != cycle_start) {
-                cout << cycle_end << " ";
-                cycle_end = p[cycle_end];
+        if (!isCycle) {
+            cout << "topo sort:\n";
+            for (auto i = topo.rbegin(); i != topo.rend(); i += 1) {
+                printf("%d -> ", (*i));
             }
-            cout << cycle_end << "\n";
-        } else if (!topo.empty()) {
-            for (auto i = topo.rbegin(); i != topo.rend(); i += 1)
-                printf("%d(%d, %d)\n", *i, time_in[*i], time_out[*i]);
-            cout << "\n";
+            cout << "exit\n";
         }
     }
 
+    void getCycle() {
+        while (cycle_end != cycle_start) {
+            cycle.push_back(cycle_end);
+            cycle_end = p[cycle_end];
+        }
+        cycle.push_back(cycle_start);
+    }
+
 public:
-    GraphAndTopoSort() : g(6) {};
+    GraphAndTopoSort() : g(6) {}
 
     void work() {
         build();
-        topoSort();
+        getTopo();
+        if (isCycle) {
+            getCycle();
+            cout << "Cycle:\n";
+            for (auto i = cycle.rbegin(); i != cycle.rend(); i += 1)
+                printf("%d(%d, %d) ", (*i), time_in[*i], time_out[*i]);
+            cout << "\n";
+        }
     }
 };
