@@ -16,7 +16,7 @@ typedef vector<vector<int>> vvi;
 class AnotherGraph {
 private:
     vvi g;
-    vi cycle, topo;
+    vi cycle, topo, bfsV;
     int used[5], time_in[5], time_out[5], p[5],
             time = 0, isCycle = 0, cycle_start, cycle_end;
 
@@ -60,6 +60,28 @@ private:
         topo.push_back(v);
     }
 
+    void bfs(int startVertex) {
+        time = 0;
+        setUnused();
+        queue<int> vertexQueue;
+        used[startVertex] = 1;
+        time_in[startVertex] = time++;
+        vertexQueue.push(startVertex);
+        while(!vertexQueue.empty()) {
+            int cur = vertexQueue.front();
+            vertexQueue.pop();
+            bfsV.push_back(cur);
+            time_out[cur] = time++;
+            for (auto next : g[cur]) {
+                if (used[next] == 0) {
+                    used[next] = 1;
+                    time_in[next] = time++;
+                    vertexQueue.push(next);
+                }
+            }
+        }
+    }
+
     vi getCycle() {
         while (cycle_end != cycle_start) {
             cycle.push_back(cycle_end);
@@ -69,10 +91,15 @@ private:
         return cycle;
     }
 
-    void display(vi graph, string title) {
+    void display(vi graph, bool revert, string title) {
         cout << title << ":\n";
-        for (auto v = graph.rbegin(); v != graph.rend(); v += 1)
-            printf("%d(%d, %d)\n", *v, time_in[*v], time_out[*v]);
+        if (revert) {
+            for (auto v = graph.rbegin(); v != graph.rend(); v += 1)
+                printf("%d(%d, %d)\n", *v, time_in[*v], time_out[*v]);
+        } else {
+            for (auto v = graph.begin(); v != graph.end(); v += 1)
+                printf("%d(%d, %d)\n", *v, time_in[*v], time_out[*v]);
+        }
     }
 
 public:
@@ -86,7 +113,10 @@ public:
             }
         if (isCycle) {
             getCycle();
-            display(cycle, "Cycle");
-        } else display(topo, "Topo sort");
+            display(cycle, true, "Cycle");
+        } else display(topo, true, "Topo sort");
+
+        bfs(0);
+        display(bfsV, false, "BFS");
     }
 };
