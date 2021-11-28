@@ -6,12 +6,19 @@
 #include "Graph/GraphAndTopoSort.cpp"
 #include "Graph/LargestComponentSizebyCommonFactor.cpp"
 #include "Graph/DSU.cpp"
+#include "Graph/Deikstra.cpp"
+#include "Structures/BinaryHeap.cpp"
+#include "Structures/SegmentTree.cpp"
+#include "Structures/DSU.cpp"
+#include "Structures/Graph.cpp"
+#include "Structures/SuffixArray.cpp"
+#include "Structures/Bor.cpp"
 
 typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
 int main() {
-    AnotherGraph app;
+    Bor app;
     app.work();
     return 0;
 }

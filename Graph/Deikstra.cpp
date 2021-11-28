@@ -21,22 +21,22 @@ const int n = 5;
 class Deikstra {
 private:
     vvi g;
-    vi topo, cycle, mst, distance;
+    vi topo, mst, cycle, distance;
     int used[n], time_in[n], time_out[n], p[n],
-            cycle_start, cycle_end,
-            time = 0, isCycle = 0;
+            time = 0, isCycle = 0, cycle_start, cycle_end;
 
     void resetAll() {
-        isCycle = 0, time = 0;
+        time = 0;
+        isCycle = 0;
         memset(used, 0, n * sizeof(int));
         memset(time_in, 0, n * sizeof(int));
         memset(time_out, 0, n * sizeof(int));
         memset(p, 0, n * sizeof(int));
     }
 
-    void addEdge(int start, int end, bool isDirect) {
+    void addEdge(int start, int end, bool direct) {
         g[start].push_back(end);
-        if (!isDirect) g[end].push_back(start);
+        if (!direct) g[end].push_back(start);
     }
 
     void addEdge(int start, int end) {
@@ -53,22 +53,11 @@ private:
         addEdge(4, 3);
     }
 
-    void dfsStart(int v) {
-        memset(used, 0, n * sizeof(int));
-        memset(p, 0, n * sizeof(int));
-        dfs(v);
-    }
-
-    void bfsStart(int v) {
-        resetAll();
-        bfs(v);
-    }
-
     void dfs(int v) {
         used[v] = 1;
         time_in[v] = time++;
         for (auto next : g[v]) {
-            if (used[next] == 0) {
+            if (!used[next]) {
                 p[next] = v;
                 dfs(next);
             } else if (used[next] == 1 && next != p[v]) {
@@ -83,6 +72,7 @@ private:
     }
 
     void bfs(int v) {
+        resetAll();
         queue<int> vertexQueue;
         used[v] = 1;
         time_in[v] = time++;
@@ -103,35 +93,35 @@ private:
         }
     }
 
-    void getCycle() {
-        while(cycle_end != cycle_start) {
+    void displayGraph(vi graph, string label, bool isRevert) {
+        if (isRevert) reverse(graph.begin(), graph.end());
+        cout << label << ":\n";
+        for (auto v = graph.begin(); v != graph.end(); v += 1)
+            printf("\t%d(%d, %d) - %d\n", *v, time_in[*v], time_out[*v], distance[*v]);
+    }
+
+    vi getCycle() {
+        while (cycle_end != cycle_start) {
             cycle.push_back(cycle_end);
             cycle_end = p[cycle_end];
         }
         cycle.push_back(cycle_start);
     }
 
-    void display(vi graph, string title, bool revert) {
-        cout << title << ":\n";
-        if (revert) reverse(graph.begin(), graph.end());
-        for (auto i = graph.begin(); i != graph.end(); i += 1)
-            printf("%d(%d, %d)\n", *i, time_in[*i], time_out[*i]);
-    }
 public:
-    Deikstra() : g(n), distance(n, -1) {}
+    Deikstra() : g(n), distance(n, 0) {}
 
     void work() {
         build();
-        for (int i = 0; i < n && !isCycle; i += 1) {
-            if (!used[i]) dfsStart(0);
-        }
+        for (auto i = 0; i < n && !isCycle; i += 1)
+            if (!used[i]) dfs(i);
         if (isCycle) {
             getCycle();
-            display(cycle, "Cycle", true);
+            displayGraph(cycle,"cycle", true);
         } else {
-            display(topo, "topo sort", true);
+            displayGraph(topo, "topo sort", true);
         }
-        bfsStart(0);
-        display(mst, "BFS", false);
+        bfs(0);
+        displayGraph(mst, "bfs", false);
     }
 };

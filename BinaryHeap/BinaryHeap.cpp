@@ -32,7 +32,7 @@ class BinaryHeap {
 
 public:
 
-    vi sort() {
+    vi work() {
         int len = heap.size();
         vi sortedArr(len);
         build();
