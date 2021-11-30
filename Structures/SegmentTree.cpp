@@ -8,21 +8,18 @@ public:
     vi st;
     int n = 0;
 
-    vi build(vi &arr) {
-        n = (int) arr.size();
+    void build(vi &nums) {
+        n = (int) nums.size();
         st = vi(n << 1, 0);
         for (int i = 0; i < n; i += 1)
-            st[i + n] = arr[i];
-        for (int i = n - 1; i > 0; i -= 1) {
+            st[i + n] = nums[i];
+        for (int i = n - 1; i > 0; i -= 1)
             st[i] = st[i << 1] + st[i << 1 | 1];
-        }
-        return st;
     }
 
     void modify(int v, int value) {
-        for (st[v += n] = value; v > 1; v >>= 1) {
+        for (st[v += n] = value; v > 0; v >>= 1)
             st[v >> 1] = st[v] + st[v ^ 1];
-        }
     }
 
     int query(int l, int r) {

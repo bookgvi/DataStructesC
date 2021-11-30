@@ -6,7 +6,6 @@ typedef vector<vector<int>> vvi;
 
 class SuffixArrayV2 {
 public:
-    vi p;
     vvi cList;
 
     vi suffixArray(string &str) {

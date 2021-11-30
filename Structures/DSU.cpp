@@ -8,9 +8,7 @@ class DSUV2 {
 public:
     vi parent, size;
 
-    DSUV2() : parent(10), size(10) {}
-
-    void set_tree(int v) {
+    void build_set(int v) {
         parent[v] = v;
     }
 
@@ -22,8 +20,9 @@ public:
     int union_sets(int a, int b) {
         a = find_set(a);
         b = find_set(b);
-        if (size[a] < size[b])
-            swap(a, b);
+        if (a != b)
+            if (size[a] < size[b])
+                swap(a, b);
         parent[b] = a;
         size[a] += size[b];
         return a;

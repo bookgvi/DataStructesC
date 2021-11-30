@@ -18,7 +18,7 @@ typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
 int main() {
-    Bor app;
+    SegmentTreeV2 app;
     app.work();
     return 0;
 }
