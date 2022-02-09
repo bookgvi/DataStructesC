@@ -11,7 +11,7 @@ typedef vector<vector<int>> vvi;
  * */
 class GraphV2 {
 public:
-    int n = 4;
+    int n = 5;
     vvi g;
     vi topo, cycle, mst,
             used, p, time_in, time_out;
@@ -29,9 +29,10 @@ public:
 
     void build() {
         addEdge(0, 1);
-        addEdge(0, 2);
-        addEdge(3, 2);
-        addEdge(3, 1);
+        addEdge(0, 4);
+        addEdge(4, 5);
+        addEdge(1, 2);
+        addEdge(1, 3);
     }
 
     void setUnused() {

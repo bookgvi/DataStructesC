@@ -7,15 +7,15 @@ class BinaryHeapV2 {
 public:
     vi heap;
 
-    static void siftDown(int v, vi &arr1) {
-        int len = (int) arr1.size(), half = len >> 1;
+    void siftDown(int v, vi &ar1) {
+        int len = (int) ar1.size(), half = len >> 1;
         while (v < half) {
             int l = (v << 1) + 1;
             int r = l + 1;
-            int t = r < len && arr1[r] < arr1[l] ? r : l;
-            if (arr1[v] <= arr1[t]) break;
-            swap(arr1[v], arr1[t]);
-            v = t;
+            int tmp = r < len && ar1[r] < ar1[l] ? r : l;
+            if (ar1[v] <= ar1[tmp]) break;
+            swap(ar1[v], ar1[tmp]);
+            v = tmp;
         }
     }
 
@@ -26,9 +26,9 @@ public:
         }
     }
 
-    void build(vi &nums) {
-        for (int i = (int) nums.size() - 1; i >= 0; i -= 1)
-            siftDown(i, nums);
+    void build(vi &arr1) {
+        for (int i = (int) arr1.size() - 1; i >= 0; i -= 1)
+            siftDown(i, arr1);
     }
 
     void work() {

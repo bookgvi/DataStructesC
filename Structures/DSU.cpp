@@ -8,21 +8,21 @@ class DSUV2 {
 public:
     vi parent, size;
 
-    void build_set(int v) {
+    void setParent(int v) {
         parent[v] = v;
     }
 
-    int find_set(int v) {
+    int find(int v) {
         if (parent[v] == v) return v;
-        return parent[v] = find_set(parent[v]);
+        return parent[v] = find(parent[v]);
     }
 
-    int union_sets(int a, int b) {
-        a = find_set(a);
-        b = find_set(b);
+    int unionSets(int a, int b) {
+        a = find(a);
+        b = find(b);
+
         if (a != b)
-            if (size[a] < size[b])
-                swap(a, b);
+            if (size[a] < size[b]) swap(a, b);
         parent[b] = a;
         size[a] += size[b];
         return a;

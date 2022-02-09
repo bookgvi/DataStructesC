@@ -106,6 +106,7 @@ private:
             cycle_end = p[cycle_end];
         }
         cycle.push_back(cycle_start);
+        return cycle;
     }
 
 public:

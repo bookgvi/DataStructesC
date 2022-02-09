@@ -13,12 +13,13 @@
 #include "Structures/Graph.cpp"
 #include "Structures/SuffixArray.cpp"
 #include "Structures/Bor.cpp"
+#include "Graph/AnotherGraphII.cpp"
 
 typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
 int main() {
-    SegmentTreeV2 app;
+    AnotherGraphII app;
     app.work();
     return 0;
 }

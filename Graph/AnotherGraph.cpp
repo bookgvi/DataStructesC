@@ -17,27 +17,24 @@ class AnotherGraph {
 private:
     vvi g;
     vi cycle, topo, bfsV;
-    int used[5], time_in[5], time_out[5], p[5],
+    int used[6], time_in[6], time_out[6], p[6],
             time = 0, isCycle = 0, cycle_start, cycle_end;
 
-    void addEdge(int start, int end, bool isDirect) {
+    void addEdge(int start, int end) {
         g[start].push_back(end);
-        if (!isDirect) g[end].push_back(start);
+//        if (!isDirect) g[end].push_back(start);
     }
 
     void setUnused() {
-        memset(used, 0, 5 * sizeof(int));
+        memset(used, 0, 6 * sizeof(int));
     }
 
     vvi build() {
-        addEdge(0, 1, true);
-        addEdge(0, 2, true);
-        addEdge(1, 2, true);
-        addEdge(1, 3, true);
-        addEdge(1, 4, true);
-        addEdge(2, 3, true);
-        addEdge(2, 4, true);
-        addEdge(3, 4, true);
+        addEdge(0, 1);
+        addEdge(0, 4);
+        addEdge(4, 5);
+        addEdge(1, 2);
+        addEdge(1, 3);
         setUnused();
         return g;
     }
@@ -103,11 +100,11 @@ private:
     }
 
 public:
-    AnotherGraph() : g(5) {}
+    AnotherGraph() : g(6) {}
 
     void work() {
         build();
-        for (auto i = 0; i < 5 && !isCycle; i += 1)
+        for (auto i = 0; i < 6 && !isCycle; i += 1)
             if (!used[i]) {
                 dfs(0);
             }
